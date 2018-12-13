@@ -1,0 +1,246 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<title>ROP Project</title>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp" type="text/javascript"></script>
+
+    
+
+<link href="css/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #map
+        {
+            height: 100%;
+            width: 100%;
+        }
+       .main_menu
+    {
+        width: 100px;
+        background-color: #778899;
+        color: #000;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        margin-right: 5px;
+    }
+    .level_menu
+    {
+        width: 110px;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        margin-top: 5px;
+    }
+    .selected
+    {
+        background-color: #808080;
+        color: #fff;
+    }
+        
+
+        #map-canvas
+        {
+            height: 100%;
+            width: 100%;
+        }
+
+</style>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+    <div id="main" class="main">
+    <div id="header" class="header"><asp:LinkButton ID="btn_Front" runat="server" onclick="btn_Front_Click"><img alt="headerImage" src="images/RO_Navigation_Bar.jpg" width="100%" height="120"/></asp:LinkButton></div>
+    <div id="headerBottom" class="headerBottom">
+            <asp:Label ID="lblCdate"  Text="Date:" runat="server"  Font-Bold="True"></asp:Label> <asp:Label ID="lblDate" runat="server" Font-Bold="True"></asp:Label>&nbsp;&nbsp;
+            <asp:Label ID="lblCtime"  Text="Time:" runat="server" Font-Bold="True" Visible="false"></asp:Label> <asp:Label ID="lblTime" runat="server" Font-Bold="True" Visible="false"></asp:Label>
+    
+    <div id="menu" class="menu">
+<%--    <asp:LinkButton ID="btn_Home" runat="server" onclick="btn_Home_Click" Font-Underline="False" ForeColor="Black">HOME</asp:LinkButton>&nbsp;|&nbsp;
+    <asp:LinkButton ID="btn_Link" runat="server" onclick="btn_Link_Click" Font-Underline="False" ForeColor="Black">POWER CONTROL PANEL</asp:LinkButton>--%>
+    
+        <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" ForeColor="Black">
+        <Items>
+
+        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="HOME" Selected="True" ></asp:MenuItem>
+        <asp:MenuItem NavigateUrl="~/ControlPanel.aspx" Text="POWER CONTROL PANEL" ></asp:MenuItem>
+
+    </Items>
+</asp:Menu>
+    
+    </div>
+    </div>
+    <div id="content" class="content">
+    <div id="leftContent" class="leftContent">
+        
+                   <div id="map">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp" type="text/javascript"></script>
+     
+    <script type="text/javascript">
+
+        var map;
+        function initialize() {
+            var mapOptions = {
+                zoom: 7,
+                center: new google.maps.LatLng(7.832225, 80.557752)
+            };
+
+            var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+            var marker1 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.71222, 80.273416),
+                map: map,
+                title: 'ශ්‍රී සුදර්ශනාරාමය තිරප්පනය'
+            });
+
+            var marker2 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.245236, 80.322500),
+                map: map,
+                title: 'අ/සෙලෙස්තිමඩුව විද්‍යාලය, තිරප්පනය'
+            });
+
+            var marker3 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.184004, 80.321450),
+                map: map,
+                title: 'ශ්‍රී සුදර්ශනාරාමය, පණ්ඩිතරබවැව, තිරප්පනය'
+            });
+
+            var marker4 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.182101, 80.182972),
+                map: map,
+                title: 'තමනාගල පුරාණ රජමහා විහාරය, තිරප්පනය '
+            });
+            var marker5 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.124442, 80.264602),
+                map: map,
+                title: 'අ/ හිරියගොලේගම විද්‍යාලය, තලාව'
+            });
+            var marker6 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.101484, 80.365758),
+                map: map,
+                title: 'ගම්බිරිගස් වැව, තලාව'
+            });
+            var marker7 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.73994, 80.374913),
+                map: map,
+                title: 'ජනසෙත ශ්‍රී පුලිගුවනාරාමය ඉදිගස්පොත, පහල තලාව'
+            });
+            var marker8 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.113280, 80.345586),
+                map: map,
+                title: 'බෞද්ධ මද්‍යස්ථානය, ගල්නෑව , බුල්නෑව'
+            });
+            var marker9 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.582555, 80.313783),
+                map: map,
+                title: '01/A ගම්මානය, අධිරාණිගම,තලාව'
+            });
+            var marker10 = new google.maps.Marker({
+                position: new google.maps.LatLng(8.124793, 80.313701),
+                map: map,
+                title: 'නල්ලමුදාව, තලාව "'
+            });
+//            var marker11 = new google.maps.Marker({
+//                position: new google.maps.LatLng(8.124793, 80.313701),
+//                map: map,
+//                title: 'Pahala Halmillewa Vidyalaya'
+//            }); 
+//            var marker12 = new google.maps.Marker({
+//                position: new google.maps.LatLng(8.181644, 80.37448),
+//                map: map,
+//                title: 'Pahala Halmillewa Vidyalaya'
+//            });
+//             var marker13 = new google.maps.Marker({
+//                position: new google.maps.LatLng(8.124793, 80.313701),
+//                map: map,
+//                title: 'Thirappane'
+//            }); 
+//            var marker14 = new google.maps.Marker({
+//                position: new google.maps.LatLng(8.124793, 80.313701),
+//                map: map,
+//                title: 'Thirappane'
+//            }); 
+//            var marker15 = new google.maps.Marker({
+//                position: new google.maps.LatLng(8.124793, 80.313701),
+//                map: map,
+//                title: 'Thirappane'
+//            });
+            google.maps.event.addListener(marker1, 'click', function () {
+
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="420px" type="text/aspx" data="DashBoard.aspx?Loc=94766280001"></object>';
+            });
+
+
+            google.maps.event.addListener(marker2, 'click', function () {
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="420px" type="text/aspx" data="DashBoard.aspx?Loc=94766280002"></object>';
+            });
+
+            google.maps.event.addListener(marker3, 'click', function () {
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="420px" type="text/aspx" data="DashBoard.aspx?Loc=94766280003"></object>';
+            });
+
+            google.maps.event.addListener(marker4, 'click', function () {
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="420px" type="text/aspx" data="DashBoard.aspx?Loc=94766280004"></object>';
+            });
+            google.maps.event.addListener(marker5, 'click', function () {
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="420px" type="text/aspx" data="DashBoard.aspx?Loc=94766280005"></object>';
+            });
+            google.maps.event.addListener(marker6, 'click', function () {
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="420px" type="text/aspx" data="DashBoard.aspx?Loc=94766280006"></object>';
+            });
+            google.maps.event.addListener(marker7, 'click', function () {
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="420px" type="text/aspx" data="DashBoard.aspx?Loc=94766280007"></object>';
+            });
+            google.maps.event.addListener(marker8, 'click', function () {
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="800px" type="text/aspx" data="DashBoard.aspx?Loc=94766280008"></object>';
+            });
+            google.maps.event.addListener(marker9, 'click', function () {
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="800px" type="text/aspx" data="DashBoard.aspx?Loc=94766280009></object>';
+            });
+            google.maps.event.addListener(marker10, 'click', function () {
+                document.getElementById('<%= pnlInfo.ClientID %>').style.visibility = 'visible';
+                document.getElementById('<%= pnlInfo.ClientID %>').innerHTML = '<object width="100%" height="800px" type="text/aspx" data="DashBoard.aspx?Loc=94766280010"></object>';
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+ 
+       <div id="map-canvas">   </div>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByZXgbSX4vO8-h3C3LHx0XTdcBaP5Siys&callback=initMap"></script>
+                </div> 
+    </div>
+    <div id="rightContent" class="rightContent">
+<asp:Panel ID="pnlInfo" runat="server">
+       
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"> </asp:ContentPlaceHolder>
+                </asp:Panel>
+    </div>
+    </div>
+
+    <div id="footer" class="footer"><center>Sri Lanka Navy Research and Development Unit</center></div>
+
+    </div>
+
+    </form>
+</body>
+</html>
